@@ -12,6 +12,7 @@ public class Crane : MonoBehaviour
     private IEnumerable<Sensor> _sensors;
 
     private Container _currentContainer;
+    public Container Container => _currentContainer;
 
     private void ContainerInstantiate() => 
         _currentContainer = Instantiate(_container, _hook.transform.position, Quaternion.identity, transform);

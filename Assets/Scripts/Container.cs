@@ -1,9 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Container : MonoBehaviour
 {
+    private Rigidbody _rigidbody;
+
+    public Rigidbody Rigidbody => _rigidbody;
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
 
     public Vector3 TopCenter()
     {
