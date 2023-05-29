@@ -1,21 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class DistanceSensor : Sensor, IInitializable<Container>
 {
     [SerializeField] private LayerMask _obstacle;
     private Container _container;
+    private Vector3 _size;
 
     public void Initialize(Container container)
     {
         _container = container;
     }
-
-
+    
     protected override void Update()
     {
         base.Update();
         if (!_container)
+        {
+            transform.position = Vector3.zero;
             return;
+        }
         transform.position = new Vector3(0, _container.transform.position.y, 0f);
     }
     

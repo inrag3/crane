@@ -10,6 +10,5 @@ public abstract class Sensor : MonoBehaviour
     protected virtual void Update()
     {
         Value = GetValue();
-        print($"{gameObject.name}: {Value}");
     }
 }

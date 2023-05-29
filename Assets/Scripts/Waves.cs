@@ -6,9 +6,16 @@ public class Waves : MonoBehaviour
 {
     [SerializeField] int _maxHeight = 0;
     [SerializeField] int _minHeight = -5;
-    [SerializeField] float _lerpValue = 2f;
+    [SerializeField] private float _lerpValue = 2f;
     [SerializeField] private Vector3 _offset;
-
+    
+    
+    public float Lerp
+    {
+        get => _lerpValue;
+        set => _lerpValue = value;
+    }
+    
     private Transform _ship;
     private bool _goingUp = false;
     private Vector3 _velocity;

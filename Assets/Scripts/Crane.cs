@@ -37,10 +37,9 @@ public class Crane : MonoBehaviour
         if (!_currentContainer) 
             return;
         var output = _rules.GetOutput(_distanceSensor, _horizontalSensor, _verticalSensor);
-        print(output.Output);
         var speed = output.Output switch
         {
-            Output.Slow => 0.03f,
+            Output.Slow => 0.01f,
             Output.Moderate => 0.1f,
             Output.Fast => 0.3f,
             _ => throw new ArgumentOutOfRangeException()
@@ -48,6 +47,8 @@ public class Crane : MonoBehaviour
         if (_distanceSensor.Value < 0.05f)
         {
             _ship.AddContainer(_currentContainer);
+            var pos = _distanceSensor.transform.position;
+            _distanceSensor.Initialize(null);
             _currentContainer = null;
             return;
         }

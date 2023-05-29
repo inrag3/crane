@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ship : MonoBehaviour
 {
@@ -12,7 +13,13 @@ public class Ship : MonoBehaviour
     {
         container.transform.SetParent(transform);
         _containers.Add(container);
+        if (_containers.Count == 4)
+        {
+            SceneManager.LoadScene(0);
+        }
         container.gameObject.layer = 3;
         ContainerDipped?.Invoke();
     }
+    
+    
 }
