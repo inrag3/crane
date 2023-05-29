@@ -37,15 +37,12 @@ public class Rules : MonoBehaviour
 
         var max = Mathf.Max(veryClose, close, medium, far);
         if (veryClose == max)
-            return global::DistanceInput.VeryClose;
-        if (close == max)
             return global::DistanceInput.Close;
         if (medium == max)
             return global::DistanceInput.Medium;
         return global::DistanceInput.Far;
         
     }
-
 
     private WindInput DirectionInput(AngleSensor sensor)
     {
