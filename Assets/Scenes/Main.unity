@@ -3266,8 +3266,8 @@ MonoBehaviour:
   _verticalSensor: {fileID: 946982792}
   _distanceSensor: {fileID: 673236081}
   _rules: {fileID: 1670933573}
-  _horizontalMultipliyer: 1
-  _verticalMultipliyer: 1
+  _horizontalMultipliyer: 5
+  _verticalMultipliyer: 2
 --- !u!4 &1670933571
 Transform:
   m_ObjectHideFlags: 0
@@ -3885,7 +3885,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!114 &1794628098
 MonoBehaviour:
   m_ObjectHideFlags: 0
