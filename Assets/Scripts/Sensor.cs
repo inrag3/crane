@@ -7,8 +7,9 @@ public abstract class Sensor : MonoBehaviour
 
     protected abstract float GetValue();
     
-    private void Update()
+    protected virtual void Update()
     {
         Value = GetValue();
+        print($"{gameObject.name}: {Value}");
     }
 }

@@ -1,5 +1,6 @@
 ﻿public enum WindInput
 {
-    Slow,
-    Fast,
+    Weak,
+    Moderate,
+    Strong,
 }
