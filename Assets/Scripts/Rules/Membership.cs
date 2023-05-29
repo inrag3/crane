@@ -22,10 +22,8 @@
     public float Get2(float value)
     {
         if (value > Points[1])
-            return 1f;
-        if (Points[0] == 0f)
-            return (Points[1] - value) / Points[1];
-        return (value - Points[0]) / (Points[1] - Points[0]);
+            return 0f;
+        return (Points[1] - value) / Points[1];
     }
     
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class DistanceRule
+public class Rule
 {
     public DistanceInput distance;
     public WindInput horizontal;

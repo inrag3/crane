@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rules : MonoBehaviour
 {
-    [SerializeField] private List<DistanceRule> _rules;
+    [SerializeField] private List<Rule> _rules;
     private Membership _veryCloseDistance;
     private Membership _closeDistance;
     private Membership _mediumDistance;
@@ -16,15 +16,14 @@ public class Rules : MonoBehaviour
 
     private void Awake()
     {
-        _veryCloseDistance = new Membership(new[] { 0f, 1f });
-        _closeDistance = new Membership(new[] { 0f, 1f, 1.5f, 2f });
+        _veryCloseDistance = new Membership(new[] { 0f, 0.3f });
+        _closeDistance = new Membership(new[] { 0f, 0.3f, 1.5f, 2f });
         _mediumDistance = new Membership(new[] { 1.5f, 2f, 5.5f, 6f });
         _farDistance = new Membership(new[] { 5.5f, 6f, 15f, 15.5f });
-
         
         _weakWindSpeed = new Membership(new[] { 0f, 0.35f });
         _moderateWindSpeed = new Membership(new[] { 0f, 0.35f, 0.65f, 1f });
-        _strongWindSpeed = new Membership(new[] { 0.65f, 1f});
+        _strongWindSpeed = new Membership(new[] { 0.65f, 1f, 3f, 3.25f});
     }
 
 
@@ -35,6 +34,7 @@ public class Rules : MonoBehaviour
         var medium = _mediumDistance.Get(sensor.Value);
         var far = _farDistance.Get(sensor.Value);
 
+        print($"{veryClose}, {close}, {medium}. {far}");
         var max = Mathf.Max(veryClose, close, medium, far);
         if (veryClose == max)
             return global::DistanceInput.Close;

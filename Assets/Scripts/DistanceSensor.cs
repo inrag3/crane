@@ -14,6 +14,8 @@ public class DistanceSensor : Sensor, IInitializable<Container>
     protected override void Update()
     {
         base.Update();
+        if (!_container)
+            return;
         transform.position = new Vector3(0, _container.transform.position.y, 0f);
     }
     

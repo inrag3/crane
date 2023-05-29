@@ -17,40 +17,38 @@ public class Crane : MonoBehaviour
 
     private Container _currentContainer;
 
-    private void ContainerInstantiate() 
+    public void ContainerInstantiate() 
     {
         _currentContainer = Instantiate(_container, _place.transform.position, _container.transform.rotation, transform);
         _distanceSensor.Initialize(_currentContainer);
     }
-       
-
+    
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = 2;
-        ContainerInstantiate();
-    }
-
-    private void OnEnable()
-    {
-        _ship.ContainerDipped += ContainerInstantiate;
-    }
-
-    private void OnDisable()
-    {
-        _ship.ContainerDipped -= ContainerInstantiate;
     }
     
     private void Update()
     {
         var position = new Vector3(_hook.position.x, transform.position.y, 0);
         _lineRenderer.SetPosition(0, position);
-        _lineRenderer.SetPosition(1, _currentContainer.TopCenter());
+        _lineRenderer.SetPosition(1, _currentContainer ? _currentContainer.TopCenter() : position);
+        if (!_currentContainer) 
+            return;
         var output = _rules.GetOutput(_distanceSensor, _horizontalSensor, _verticalSensor);
-        var speed = 0;
-        if (speed == 0f)
+        print(output.Output);
+        var speed = output.Output switch
+        {
+            Output.Slow => 0.03f,
+            Output.Moderate => 0.1f,
+            Output.Fast => 0.3f,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        if (_distanceSensor.Value < 0.05f)
         {
             _ship.AddContainer(_currentContainer);
+            _currentContainer = null;
             return;
         }
         _currentContainer.Rigidbody.AddForce(0, -speed, 0, ForceMode.VelocityChange);
