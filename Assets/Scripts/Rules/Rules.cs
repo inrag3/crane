@@ -17,12 +17,12 @@ public class Rules : MonoBehaviour
     private void Awake()
     {
         _closeDistance = new Membership(new[] { 0f, 0.5f });
-        _mediumDistance = new Membership(new[] { 0.5f, 1f, 5.5f, 6f });
-        _farDistance = new Membership(new[] { 5.5f, 6f, 15f, 15.5f });
-        
-        _weakWindSpeed = new Membership(new[] { 0f, 0.35f });
-        _moderateWindSpeed = new Membership(new[] { 0f, 0.35f, 0.65f, 1f });
-        _strongWindSpeed = new Membership(new[] { 0.65f, 1f, 3f, 3.25f});
+        _mediumDistance = new Membership(new[] { 0.5f, 1f, 2.5f, 3f });
+        _farDistance = new Membership(new[] { 3f, 3.5f, 10f, 10.5f });
+
+        _weakWindSpeed = new Membership(new[] { 0f, 0.1f });
+        _moderateWindSpeed = new Membership(new[] { 0f, 0.1f, 0.65f, 1f });
+        _strongWindSpeed = new Membership(new[] { 0.65f, 1f, 3f, 3.25f });
     }
 
 
@@ -39,7 +39,6 @@ public class Rules : MonoBehaviour
         if (medium == max)
             return global::DistanceInput.Medium;
         return global::DistanceInput.Far;
-        
     }
 
     private WindInput DirectionInput(AngleSensor sensor)
@@ -48,7 +47,7 @@ public class Rules : MonoBehaviour
         var weak = _weakWindSpeed.Get2(value);
         var moderate = _moderateWindSpeed.Get(value);
         var strong = _strongWindSpeed.Get(value);
-        
+
         var max = Mathf.Max(weak, moderate, strong);
         if (weak == max)
             return WindInput.Weak;

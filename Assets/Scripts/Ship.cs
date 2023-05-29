@@ -15,11 +15,12 @@ public class Ship : MonoBehaviour
         _containers.Add(container);
         if (_containers.Count == 4)
         {
-            SceneManager.LoadScene(0);
+            Invoke(nameof(Restart), 1f);
         }
         container.gameObject.layer = 3;
         ContainerDipped?.Invoke();
     }
     
+    private void Restart() => SceneManager.LoadScene(0);
     
 }

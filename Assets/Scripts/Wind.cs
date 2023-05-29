@@ -25,6 +25,6 @@ public class Wind : MonoBehaviour
         var targetPosition = new Vector3(x, rigidBody.transform.position.y, z);
         var force = targetPosition - rigidBody.position;
         rigidBody.AddForce(force, ForceMode.VelocityChange);
-        rigidBody.AddForce(_direction * Value * (_direction.z == 0 ? 5f : 2f), ForceMode.VelocityChange);
+        rigidBody.AddForce(_direction * Value * (_direction.z == 0 ? 2.5f : 1f), ForceMode.VelocityChange);
     }
 }

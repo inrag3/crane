@@ -12,6 +12,11 @@ public class Crane : MonoBehaviour
     [SerializeField] private AngleSensor _verticalSensor;
     [SerializeField] private DistanceSensor _distanceSensor;
     [SerializeField] private Rules _rules;
+    [SerializeField] private float _horizontalMultipliyer = 2f;
+    [SerializeField] private float _verticalMultipliyer = 2f;
+    
+    
+    public bool IsFight { get; set; }
 
     private LineRenderer _lineRenderer;
 
@@ -29,7 +34,7 @@ public class Crane : MonoBehaviour
         _lineRenderer.positionCount = 2;
     }
     
-    private void Update()
+    private void FixedUpdate()
     {
         var position = new Vector3(_hook.position.x, transform.position.y, 0);
         _lineRenderer.SetPosition(0, position);
@@ -39,11 +44,17 @@ public class Crane : MonoBehaviour
         var output = _rules.GetOutput(_distanceSensor, _horizontalSensor, _verticalSensor);
         var speed = output.Output switch
         {
-            Output.Slow => 0.01f,
-            Output.Moderate => 0.1f,
+            Output.Slow => 0.02f,
+            Output.Moderate => 0.07f,
             Output.Fast => 0.3f,
+            // Output.Slow => 0.01f,
+            // Output.Moderate => 0.01f,
+            // Output.Fast => 0.1f,
             _ => throw new ArgumentOutOfRangeException()
         };
+
+      
+        
         if (_distanceSensor.Value < 0.05f)
         {
             _ship.AddContainer(_currentContainer);
@@ -52,6 +63,36 @@ public class Crane : MonoBehaviour
             _currentContainer = null;
             return;
         }
-        _currentContainer.Rigidbody.AddForce(0, -speed, 0, ForceMode.VelocityChange);
+        
+        _currentContainer.Rigidbody.AddForce(
+            0, 
+            -speed, 
+            0, 
+            ForceMode.VelocityChange);
+
+        if (!IsFight) 
+            return;
+        var horizontal = output.Horizontal switch
+        {
+            Direction.None => 0.01f,
+            Direction.Weak => 0.25f,
+            Direction.Strong => 0.5f,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        
+        var vertical = output.Vertical switch
+        {
+            Direction.None => 0.01f,
+            Direction.Weak => 0.25f,
+            Direction.Strong => 0.5f,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        
+        _currentContainer.Rigidbody.AddForce(
+            -Mathf.Sign(_horizontalSensor.Value)*horizontal*_horizontalMultipliyer, 
+            0, 
+            -Mathf.Sign(_verticalSensor.Value)*vertical*_verticalMultipliyer, 
+            ForceMode.VelocityChange);
     }
 }
