@@ -4,56 +4,59 @@ using UnityEngine;
 
 public class Waves : MonoBehaviour
 {
-    [SerializeField] int MaxHeight = 0;
-    [SerializeField] int MinHeight = -5;
-    [SerializeField] float LerpValue = 2f;
-    private Vector3 Offset = new Vector3(0, 3, 0);
-    private Transform ShipTransform;
-    private bool GoingUp = false;
+    [SerializeField] int _maxHeight = 0;
+    [SerializeField] int _minHeight = -5;
+    [SerializeField] float _lerpValue = 2f;
+    [SerializeField] private Vector3 _offset;
 
-    void Awake()
+    private Transform _ship;
+    private bool _goingUp = false;
+    private Vector3 _velocity;
+
+    private void Awake()
     {
-        //TODO тут что-то страшное
-        Application.targetFrameRate = 30;
+        _ship = GameObject.Find("Ship").transform;
+        transform.position = _ship.position - _offset;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void FixedUpdate()
     {
-        ShipTransform = GameObject.Find("Ship").GetComponent<Transform>();
-        transform.position = (ShipTransform.position - Offset);
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {   
-        if (GoingUp)
-            GoUp(new Vector3(0, Random.Range(MinHeight, MaxHeight), 0));
+        if (_goingUp)
+        {
+            GoUp(new Vector3(-0.7f, Random.Range(_minHeight, _maxHeight), 0));
+        }
         else
-            GoDown(new Vector3(0, MinHeight, 0));
+        {
+            GoDown(new Vector3(-0.7f, _minHeight, 0));
+        }
     }
+
 
     //Двигаемся к рандомной высоте
-    void GoUp(Vector3 target)
+    private void GoUp(Vector3 target)
     {
         if (Vector3.Distance(transform.position, target) > 0.05f) 
         {
-            transform.position = Vector3.Lerp(transform.position, target, LerpValue * Time.fixedDeltaTime);
-            ShipTransform.position = Vector3.Lerp(ShipTransform.position, target + Offset, LerpValue * Time.fixedDeltaTime);
+            transform.position = Vector3.SmoothDamp(transform.position, target, ref _velocity, _lerpValue);
+            _ship.position = Vector3.SmoothDamp(_ship.position, target + _offset, ref _velocity, _lerpValue);
         }
         else
-            GoingUp = false;
+        {
+            _goingUp = false;
+        }
     }
 
     //Двигаемся к MinHeight
-    void GoDown(Vector3 target)
+    private void GoDown(Vector3 target)
     {
         if (Vector3.Distance(transform.position, target) > 0.05f) 
         {
-            transform.position = Vector3.Lerp(transform.position, target, LerpValue * Time.fixedDeltaTime);
-            ShipTransform.position = Vector3.Lerp(ShipTransform.position, target + Offset, LerpValue * Time.fixedDeltaTime);
+            transform.position = Vector3.SmoothDamp(transform.position, target, ref _velocity, _lerpValue);
+            _ship.position = Vector3.SmoothDamp(_ship.position, target + _offset, ref _velocity, _lerpValue);
         }
         else
-            GoingUp = true;
+        {
+            _goingUp = true;
+        }
     }
 }
