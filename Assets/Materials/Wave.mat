@@ -10,11 +10,10 @@ Material:
   m_Name: Wave
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
-  - _EMISSION
   - _GLOSSYREFLECTIONS_OFF
   - _SPECULARHIGHLIGHTS_OFF
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -78,6 +77,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.18752226, g: 0.25407022, b: 0.8113208, a: 1}
-    - _EmissionColor: {r: 0.32792807, g: 0.58544093, b: 0.6509434, a: 1}
+    - _Color: {r: 0.5613208, g: 1, b: 0.98831195, a: 1}
+    - _EmissionColor: {r: 0.10461649, g: 0.3967553, b: 0.5028866, a: 1}
   m_BuildTextureStacks: []

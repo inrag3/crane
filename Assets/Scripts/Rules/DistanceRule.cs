@@ -2,10 +2,10 @@
 using UnityEngine;
 
 [Serializable]
-public class Rule
+public class DistanceRule
 {
     public DistanceInput distance;
     public WindInput horizontal;
     public WindInput vertical;
-    public Output speed;
+    public OutPut OutPut;
 }

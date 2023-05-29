@@ -1,7 +1,24 @@
-﻿public enum Output
+﻿using System;
+
+public enum Output
 {
     Slow,
     Moderate,
     Fast,
-    Stop,
+}
+
+public enum Direction
+{
+    None,
+    Weak,
+    Strong,
+}
+
+
+[Serializable]
+public class OutPut
+{
+    public Output Output;
+    public Direction Horizontal;
+    public Direction Vertical;
 }

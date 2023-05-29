@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class Container : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
+    [SerializeField] private Rigidbody _rigidbody;
 
     public Rigidbody Rigidbody => _rigidbody;
-
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
-
+    
     public Vector3 TopCenter()
     {
         var halfHeight = transform.localScale.y / 2f;
