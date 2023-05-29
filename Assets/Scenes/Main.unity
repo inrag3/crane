@@ -2038,10 +2038,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rules:
+  - distance: 2
+    horizontal: 0
+    vertical: 0
+    OutPut:
+      Output: 2
+      Horizontal: 0
+      Vertical: 0
+  - distance: 1
+    horizontal: 0
+    vertical: 0
+    OutPut:
+      Output: 0
+      Horizontal: 0
+      Vertical: 0
   - distance: 0
     horizontal: 0
     vertical: 0
-    speed: 0
+    OutPut:
+      Output: 0
+      Horizontal: 0
+      Vertical: 0
+  - distance: 0
+    horizontal: 1
+    vertical: 0
+    OutPut:
+      Output: 0
+      Horizontal: 1
+      Vertical: 0
+  - distance: 0
+    horizontal: 2
+    vertical: 0
+    OutPut:
+      Output: 0
+      Horizontal: 1
+      Vertical: 0
 --- !u!1 &1702982260
 GameObject:
   m_ObjectHideFlags: 0
