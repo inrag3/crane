@@ -37,7 +37,7 @@ public class Crane : MonoBehaviour
     
     private void FixedUpdate()
     {
-        var position = new Vector3(_hook.position.x, transform.position.y, 0);
+        var position = new Vector3(_hook.position.x, transform.position.y, _hook.transform.position.z);
         _lineRenderer.SetPosition(0, position);
         _lineRenderer.SetPosition(1, _currentContainer ? _currentContainer.TopCenter() : position);
         if (!_currentContainer) 
@@ -68,8 +68,7 @@ public class Crane : MonoBehaviour
             0, 
             ForceMode.VelocityChange);
 
-        if (!IsFight) 
-            return;
+
         var horizontal = output.Horizontal switch
         {
             Direction.None => 0.01f,
@@ -85,7 +84,7 @@ public class Crane : MonoBehaviour
             Direction.Strong => 0.5f,
             _ => throw new ArgumentOutOfRangeException()
         };
-
+        _hook.transform.position = new Vector3(-_horizontalSensor.Value*horizontal*_horizontalMultipliyer, _hook.transform.position.y, -_verticalSensor.Value*vertical*_verticalMultipliyer);
         print(-Mathf.Sign(_horizontalSensor.Value)*horizontal);
         
         _currentContainer.Rigidbody.AddForce(
