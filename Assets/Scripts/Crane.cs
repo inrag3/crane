@@ -17,6 +17,7 @@ public class Crane : MonoBehaviour
     
     
     public bool IsFight { get; set; }
+    public Container Container => _currentContainer;
 
     private LineRenderer _lineRenderer;
 

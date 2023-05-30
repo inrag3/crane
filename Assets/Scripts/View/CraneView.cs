@@ -17,5 +17,9 @@ public class CraneView : MonoBehaviour
         _button.onClick.RemoveListener(ContainerInstantiate);
     }
 
-    private void ContainerInstantiate() => _crane.ContainerInstantiate();
+    private void ContainerInstantiate()
+    {
+        if (!_crane.Container)
+            _crane.ContainerInstantiate();
+    }
 }
