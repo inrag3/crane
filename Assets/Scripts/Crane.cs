@@ -44,12 +44,9 @@ public class Crane : MonoBehaviour
         var output = _rules.GetOutput(_distanceSensor, _horizontalSensor, _verticalSensor);
         var speed = output.Output switch
         {
-            Output.Slow => 0.02f,
-            Output.Moderate => 0.07f,
+            Output.Slow => 0.05f,
+            Output.Moderate => 0.1f,
             Output.Fast => 0.3f,
-            // Output.Slow => 0.01f,
-            // Output.Moderate => 0.01f,
-            // Output.Fast => 0.1f,
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -75,7 +72,7 @@ public class Crane : MonoBehaviour
         var horizontal = output.Horizontal switch
         {
             Direction.None => 0.01f,
-            Direction.Weak => 0.25f,
+            Direction.Weak => 0.3f,
             Direction.Strong => 0.5f,
             _ => throw new ArgumentOutOfRangeException()
         };
@@ -83,16 +80,17 @@ public class Crane : MonoBehaviour
         var vertical = output.Vertical switch
         {
             Direction.None => 0.01f,
-            Direction.Weak => 0.25f,
+            Direction.Weak => 0.3f,
             Direction.Strong => 0.5f,
             _ => throw new ArgumentOutOfRangeException()
         };
 
+        print(-Mathf.Sign(_horizontalSensor.Value)*horizontal);
         
         _currentContainer.Rigidbody.AddForce(
-            -Mathf.Sign(_horizontalSensor.Value)*horizontal*_horizontalMultipliyer, 
+            -_horizontalSensor.Value*horizontal*_horizontalMultipliyer, 
             0, 
-            -Mathf.Sign(_verticalSensor.Value)*vertical*_verticalMultipliyer, 
+            -_verticalSensor.Value*vertical*_verticalMultipliyer, 
             ForceMode.VelocityChange);
     }
 }

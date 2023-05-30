@@ -28,7 +28,7 @@ public class DistanceSensor : Sensor, IInitializable<Container>
         var ray = new Ray(transform.position, -transform.up);
         if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _obstacle))
         {
-            print($"Столкновение с объектом: {hit.collider.gameObject.name} " + hit.distance);
+            
         }
         return hit.distance;
     }

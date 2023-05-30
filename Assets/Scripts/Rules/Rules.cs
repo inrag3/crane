@@ -21,8 +21,8 @@ public class Rules : MonoBehaviour
         _farDistance = new Membership(new[] { 3f, 3.5f, 10f, 10.5f });
 
         _weakWindSpeed = new Membership(new[] { 0f, 0.1f });
-        _moderateWindSpeed = new Membership(new[] { 0f, 0.1f, 0.65f, 1f });
-        _strongWindSpeed = new Membership(new[] { 0.65f, 1f, 3f, 3.25f });
+        _moderateWindSpeed = new Membership(new[] { 0f, 0.1f, 0.3f, 0.4f });
+        _strongWindSpeed = new Membership(new[] { 0.4f, 0.6f, 3f, 3.1f });
     }
 
 
@@ -31,8 +31,7 @@ public class Rules : MonoBehaviour
         var close = _closeDistance.Get2(sensor.Value);
         var medium = _mediumDistance.Get(sensor.Value);
         var far = _farDistance.Get(sensor.Value);
-
-        print($"{close}, {medium}. {far}");
+        
         var max = Mathf.Max(close, medium, far);
         if (close == max)
             return global::DistanceInput.Close;
